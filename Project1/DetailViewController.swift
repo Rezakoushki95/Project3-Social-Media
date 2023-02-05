@@ -11,6 +11,7 @@ class DetailViewController: UIViewController {
 	@IBOutlet var imageView: UIImageView!
 	
 	var selectedImage: String?
+	var imageName: String?
 	
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +42,13 @@ class DetailViewController: UIViewController {
 			print("No image found")
 			return
 		}
-		let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+		
+		guard let imageName = imageName else {
+			print("Image has no name")
+			return
+		}
+
+		let vc = UIActivityViewController(activityItems: [image, imageName], applicationActivities: [])
 		vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
 		present(vc, animated: true)
 		
